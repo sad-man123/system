@@ -22,43 +22,86 @@ while True:
         except:
             print("install lib is not successfully")
 
-
+#py -3.8 Desktop/my promming system/main.py
 class Main():
     def __init__(self):
         super().__init__()
+        self.creator = {"main menu": ["",
+                                      "",
+                                      "    @@   |   @@",
+                                      "    @@   |   @@",
+                                      "    @@       @@",
+                                      "    @@=======@@",
+                                      "    @@       @@",
+                                      "    @@       @@",
+                                      "    @@       @@",
+                                      ""]}
         self.current_menu = {"main": ["    start code    ",
                                       "    github        ",
                                       "    creator       ",
                                       "    directory     ",
-                                      "    exit          "]}
+                                      "    exit          "],
+                             "creator mod": ["for exit click Y in keyboard"]}
         self.menu_manager = "<<              >>"
         self.current_line = 0
         self.cur_menu = "main"
+        self.creator_mod = eval(json.load(open("data.json"))["creator mod"])
+        print(json.load(open("data.json"))["creator mod"])
+        print(self.creator_mod)
+        self.password_input = ""
+        self.current_creator_menu = "main menu"
         self.end_array = []
         with Events() as events:
             for event in events:
                 os.system("cls")
                 if "Release" in str(event):
-                    styled_text = pyfiglet.figlet_format('Python3', font='doom')
-                    print(styled_text)
+                    if self.cur_menu == "main":
+                        if self.creator_mod:
+                            for i in self.creator[self.current_creator_menu]:
+                                print(i)
+                        else:
+                            styled_text = pyfiglet.figlet_format('Python3', font='doom')
+                            print(styled_text)
                     key = str(event.key).replace("'", "")
                     if key == "s":
                         self.current_line += 1
                     elif key == "w":
                         self.current_line -= 1
+                    elif key == "y":
+                        if self.cur_menu == "creator mod":
+                            self.cur_menu = "main"
+                    if self.cur_menu == "creator mod":
+                        if "Key.shift" in key:
+                            ...
+                        else:
+                            if key == "d":
+                                self.password_input = ""
+                            else:
+                                self.password_input += key
+                            print(self.password_input)
+                            print(self.creator_mod)
+                        if self.password_input == "123123_vn122":
+                            self.creator_mod = True
+                        else:
+                            print(False)
                     if self.current_line == -1:
                         self.current_line = len(self.current_menu[self.cur_menu]) - 1
                     elif self.current_line >= len(self.current_menu[self.cur_menu]):
                         self.current_line = 0
-                    if key == "Key.enter":
+                    elif key == "Key.enter":
                         if self.cur_menu == "main":
                             if self.current_line == 4:
                                 os.system("cls")
                                 break
+                            elif self.current_line == 2:
+                                self.cur_menu = "creator mod"
 
                     self.current_array()
-                    self.array_1 = self.current_menu[self.cur_menu]
-                    self.adder()
+                    if self.cur_menu == "creator mod":
+                        self.end_array = self.current_menu[self.cur_menu]
+                    else:
+                        self.array_1 = self.current_menu[self.cur_menu]
+                        self.adder()
                     print(self.current_line)
                 for i in self.end_array:
                     print(i)
