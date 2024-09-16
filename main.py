@@ -1,10 +1,11 @@
 import os, json
+import time
 
 new_lib = True
 while True:
     try:
         from pynput.keyboard import Events
-        import pyfiglet
+        import pyfiglet, time
         break
     except Exception as ex:
         if new_lib:
@@ -26,35 +27,38 @@ while True:
 class Main():
     def __init__(self):
         super().__init__()
-        self.creator = {"main menu": ["",
-                                      "",
-                                      "    @@   |   @@",
-                                      "    @@   |   @@",
-                                      "    @@       @@",
-                                      "    @@=======@@",
-                                      "    @@       @@",
-                                      "    @@       @@",
-                                      "    @@       @@",
-                                      ""]}
+        self.current_line = 0
         self.current_menu = {"main": ["    start code    ",
                                       "    github        ",
                                       "    creator       ",
                                       "    directory     ",
                                       "    exit          "],
-                             "creator mod": ["for exit click Y in keyboard"]}
+                             "creator mod": ["for exit click Y in keyboard"],
+                             "not found": ["This part isn't make",
+                                           "Coming soon",
+                                           "exit for Y"]}
         self.menu_manager = "<<              >>"
-        self.current_line = 0
         self.cur_menu = "main"
-        self.creator_mod = eval(json.load(open("data.json"))["creator mod"])
-        print(json.load(open("data.json"))["creator mod"])
-        print(self.creator_mod)
+        self.data_json = json.load(open("data.json"))
+        self.creator_mod = eval(self.data_json["creator mod"])
         self.password_input = ""
         self.current_creator_menu = "main menu"
         self.end_array = []
+        print("Press q, for the start")
         with Events() as events:
             for event in events:
-                os.system("cls")
+                self.creator = {"main menu": ["",
+                                              "",
+                                              f"   {' ' * self.current_line}@@   |   @@",
+                                              f"   {' ' * self.current_line}@@   |   @@",
+                                              f"   {' ' * self.current_line}@@       @@",
+                                              f"   {' ' * self.current_line}@@=======@@",
+                                              f"   {' ' * self.current_line}@@       @@",
+                                              f"   {' ' * self.current_line}@@       @@",
+                                              f"   {' ' * self.current_line}@@       @@",
+                                              ""]}
                 if "Release" in str(event):
+                    os.system("cls")
                     if self.cur_menu == "main":
                         if self.creator_mod:
                             for i in self.creator[self.current_creator_menu]:
@@ -82,8 +86,7 @@ class Main():
                             print(self.creator_mod)
                         if self.password_input == "123123_vn122":
                             self.creator_mod = True
-                        else:
-                            print(False)
+                            self.data_json["creator mod"] = "True"
                     if self.current_line == -1:
                         self.current_line = len(self.current_menu[self.cur_menu]) - 1
                     elif self.current_line >= len(self.current_menu[self.cur_menu]):
@@ -92,6 +95,7 @@ class Main():
                         if self.cur_menu == "main":
                             if self.current_line == 4:
                                 os.system("cls")
+                                json.dump(self.data_json, open("data.json", "w"))
                                 break
                             elif self.current_line == 2:
                                 self.cur_menu = "creator mod"
@@ -103,8 +107,10 @@ class Main():
                         self.array_1 = self.current_menu[self.cur_menu]
                         self.adder()
                     print(self.current_line)
-                for i in self.end_array:
-                    print(i)
+                    for i in self.end_array:
+                        print(i)
+                    time.sleep(0.3)
+
 
     def current_array(self):
         self.array_2 = []
