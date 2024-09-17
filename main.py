@@ -1,11 +1,14 @@
-import os, json
-import time
+import os, json, pyVariable
 
 new_lib = True
 while True:
     try:
         from pynput.keyboard import Events
-        import pyfiglet, time
+        from selenium import webdriver
+        from selenium.webdriver.common.by import By
+        from bs4 import BeautifulSoup
+        import pyfiglet, time, requests
+
         break
     except Exception as ex:
         if new_lib:
@@ -32,40 +35,42 @@ class Main():
                                       "    github        ",
                                       "    creator       ",
                                       "    directory     ",
-                                      "    exit          "],
+                                      "    exit          ",
+                                      "    check update  "],
                              "creator mod": ["for exit click Y in keyboard"],
                              "not found": ["This part isn't make",
                                            "Coming soon",
-                                           "exit for Y"]}
-        self.menu_manager = "<<              >>"
+                                           "exit for Y"],
+                             "version control": ["      update      ",
+                                                 "       exit       "]}
+        self.menu_manager = {"main menu": "<<              >>",
+                             "not found": ""}
+        self.current_manager = "main menu"
         self.cur_menu = "main"
+        self.now_array = []
         self.data_json = json.load(open("data.json"))
         self.creator_mod = eval(self.data_json["creator mod"])
+        self.now_version = self.data_json["version"]
+        self.update_bool = False
         self.password_input = ""
         self.current_creator_menu = "main menu"
+        self.creator_github_url = "sad-man123"
         self.end_array = []
         print("Press q, for the start")
         with Events() as events:
             for event in events:
                 self.creator = {"main menu": ["",
                                               "",
-                                              f"   {' ' * self.current_line}@@   |   @@",
-                                              f"   {' ' * self.current_line}@@   |   @@",
-                                              f"   {' ' * self.current_line}@@       @@",
-                                              f"   {' ' * self.current_line}@@=======@@",
-                                              f"   {' ' * self.current_line}@@       @@",
-                                              f"   {' ' * self.current_line}@@       @@",
-                                              f"   {' ' * self.current_line}@@       @@",
+                                              f"   {'  ' * self.current_line}@@   |   @@",
+                                              f"   {'  ' * self.current_line}@@   |   @@",
+                                              f"   {'  ' * self.current_line}@@       @@",
+                                              f"   {'  ' * self.current_line}@@=======@@",
+                                              f"   {'  ' * self.current_line}@@       @@",
+                                              f"   {'  ' * self.current_line}@@       @@",
+                                              f"   {'  ' * self.current_line}@@       @@",
                                               ""]}
                 if "Release" in str(event):
                     os.system("cls")
-                    if self.cur_menu == "main":
-                        if self.creator_mod:
-                            for i in self.creator[self.current_creator_menu]:
-                                print(i)
-                        else:
-                            styled_text = pyfiglet.figlet_format('Python3', font='doom')
-                            print(styled_text)
                     key = str(event.key).replace("'", "")
                     if key == "s":
                         self.current_line += 1
@@ -73,6 +78,8 @@ class Main():
                         self.current_line -= 1
                     elif key == "y":
                         if self.cur_menu == "creator mod":
+                            self.cur_menu = "main"
+                        elif self.cur_menu == "not found":
                             self.cur_menu = "main"
                     if self.cur_menu == "creator mod":
                         if "Key.shift" in key:
@@ -82,8 +89,6 @@ class Main():
                                 self.password_input = ""
                             else:
                                 self.password_input += key
-                            print(self.password_input)
-                            print(self.creator_mod)
                         if self.password_input == "123123_vn122":
                             self.creator_mod = True
                             self.data_json["creator mod"] = "True"
@@ -99,18 +104,45 @@ class Main():
                                 break
                             elif self.current_line == 2:
                                 self.cur_menu = "creator mod"
+                            elif self.current_line == 5:
+                                self.cur_menu = "version control"
+                                sait = requests.get(f"https://github.com/sad-man123/system")
+                                soup = BeautifulSoup(sait.content, 'html.parser')
+                                text = soup.find("p", attrs={"dir": "auto"})
+                                for i in text:
+                                    self.new_version = i
+                                self.update_bool = True
+                            else:
+                                self.cur_menu = "not found"
+                        elif self.cur_menu == "version control":
+                            if self.current_line == 1:
+                                self.cur_menu = "main"
 
+                    if self.cur_menu == "main":
+                        if self.creator_mod:
+                            for i in self.creator[self.current_creator_menu]:
+                                print(i)
+                        else:
+                            styled_text = pyfiglet.figlet_format('Python3', font='doom')
+                            print(styled_text)
                     self.current_array()
                     if self.cur_menu == "creator mod":
                         self.end_array = self.current_menu[self.cur_menu]
                     else:
-                        self.array_1 = self.current_menu[self.cur_menu]
-                        self.adder()
+                        if not self.cur_menu == "not found":
+                            self.array_1 = self.current_menu[self.cur_menu]
+                            self.adder()
+                            if self.cur_menu == "version control":
+                                print(f"version now: {self.now_version}")
+                                print(f"version new: {self.new_version}")
+                                self.array_1 = self.current_menu[self.cur_menu]
+                                self.adder()
+                        else:
+                            self.end_array = self.current_menu[self.cur_menu]
                     print(self.current_line)
                     for i in self.end_array:
                         print(i)
                     time.sleep(0.3)
-
 
     def current_array(self):
         self.array_2 = []
@@ -119,9 +151,9 @@ class Main():
             num_1 += 1
         for i in range(num_1):
             if i == self.current_line:
-                self.array_2.append(self.menu_manager)
+                self.array_2.append(self.menu_manager[self.current_manager])
             else:
-                self.array_2.append(" " * len(self.menu_manager))
+                self.array_2.append(" " * len(self.menu_manager[self.current_manager]))
 
     def adder(self):
         self.end_array = []
