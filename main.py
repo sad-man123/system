@@ -1,4 +1,4 @@
-import os, json, pyVariable
+import os, json, pyVariable, zipfile
 
 new_lib = True
 while True:
@@ -7,7 +7,7 @@ while True:
         from selenium import webdriver
         from selenium.webdriver.common.by import By
         from bs4 import BeautifulSoup
-        import pyfiglet, time, requests
+        import pyfiglet, time, requests, shutil
 
         break
     except Exception as ex:
@@ -117,6 +117,9 @@ class Main():
                         elif self.cur_menu == "version control":
                             if self.current_line == 1:
                                 self.cur_menu = "main"
+                            elif self.current_line == 0:
+                                self.installer_updates()
+
 
                     if self.cur_menu == "main":
                         if self.creator_mod:
@@ -127,6 +130,7 @@ class Main():
                             print(styled_text)
                     self.current_array()
                     if self.cur_menu == "creator mod":
+
                         self.end_array = self.current_menu[self.cur_menu]
                     else:
                         if not self.cur_menu == "not found":
@@ -154,6 +158,38 @@ class Main():
                 self.array_2.append(self.menu_manager[self.current_manager])
             else:
                 self.array_2.append(" " * len(self.menu_manager[self.current_manager]))
+
+    def installer_updates(self):
+        current_file = os.path.realpath(__file__)
+        current_directory = os.path.dirname(current_file)
+        print("Wait a few seconds")
+        print("Don't skip the browser")
+        driver = webdriver.Chrome()
+        driver.get("https://github.com/sad-man123/system/archive/refs/heads/master.zip")
+        time.sleep(2.5)
+        driver.close()
+        print("Archive is downlands")
+        disk_array = ["C", "D", "E", "F"]
+        disk_bool = False
+        for i in disk_array:
+            start = f"{i}:/Downloads"
+            for dirpath, dirnames, filenames in os.walk(start):
+                for filename in filenames:
+                    if filename == "system-master.zip":
+                        filename = os.path.join(dirpath, filename)
+                        print(filename)
+                        print(dirpath)
+                        disk_bool = True
+                        break
+                if disk_bool:
+                    break
+            if disk_bool:
+                break
+        # shutil.move(filename, f"{current_directory}/test")
+        with zipfile.ZipFile(f"{current_directory}/test/system-master.zip") as f:
+            f.extractall()
+
+
 
     def adder(self):
         self.end_array = []
