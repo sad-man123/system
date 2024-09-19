@@ -1,3 +1,4 @@
+import array
 import os, json, pyVariable, zipfile
 
 new_lib = True
@@ -42,21 +43,35 @@ class Main():
                                            "Coming soon",
                                            "exit for Y"],
                              "version control": ["      update      ",
-                                                 "       exit       "]}
+                                                 "       exit       "],
+                             "reboot": ["   reboot system  ",
+                                        "       exit       "],
+                             "github": ["    check github  ",
+                                        "     add github   ",
+                                        "        exit      "],
+                             "show": [""],
+                             "show github": [""]}
         self.menu_manager = {"main menu": "<<              >>",
-                             "not found": ""}
+                             "not found": "",
+                             "reboot": ">>                "}
         self.current_manager = "main menu"
         self.cur_menu = "main"
         self.now_array = []
+        self.github_sh_bo = False
         self.data_json = json.load(open("data.json"))
         self.creator_mod = eval(self.data_json["creator mod"])
         self.now_version = self.data_json["version"]
         self.update_bool = False
+        self.github_now = "sad-man123"
         self.password_input = ""
+        self.hub = ""
+        self.hub_bo = ""
         self.current_creator_menu = "main menu"
+        self.github = self.data_json["github list"]
         self.creator_github_url = "sad-man123"
         self.end_array = []
         print("Press q, for the start")
+        self.check_all_project()
         with Events() as events:
             for event in events:
                 self.creator = {"main menu": ["",
@@ -96,7 +111,12 @@ class Main():
                         self.current_line = len(self.current_menu[self.cur_menu]) - 1
                     elif self.current_line >= len(self.current_menu[self.cur_menu]):
                         self.current_line = 0
-                    elif key == "Key.enter":
+
+
+                    #Buttons def
+
+                    if key == "Key.enter":
+                        #Main menu
                         if self.cur_menu == "main":
                             if self.current_line == 4:
                                 os.system("cls")
@@ -105,6 +125,7 @@ class Main():
                             elif self.current_line == 2:
                                 self.cur_menu = "creator mod"
                             elif self.current_line == 5:
+                                self.current_line = 0
                                 self.cur_menu = "version control"
                                 sait = requests.get(f"https://github.com/sad-man123/system")
                                 soup = BeautifulSoup(sait.content, 'html.parser')
@@ -112,14 +133,84 @@ class Main():
                                 for i in text:
                                     self.new_version = i
                                 self.update_bool = True
+                            elif self.current_line == 1:
+                                self.current_line = 0
+                                self.cur_menu = "github"
                             else:
                                 self.cur_menu = "not found"
+                        # versions
                         elif self.cur_menu == "version control":
                             if self.current_line == 1:
                                 self.cur_menu = "main"
                             elif self.current_line == 0:
                                 self.installer_updates()
+                                self.cur_menu = "reboot"
+                        # github project
+                        elif self.cur_menu == "show":
+                            if self.current_line == 0:
+                                self.github_sh_bo = False
+                                self.cur_menu = "github"
+                        # github creators
+                        elif self.cur_menu == "github creators":
+                            if self.current_line == 0:
+                                self.github_sh_bo = False
+                                self.cur_menu = "github"
+                        elif self.cur_menu == "show creators":
+                            if self.current_line == 0:
+                                self.cur_menu = "github"
+                                self.github_sh_bo = False
+                            else:
+                                self.github_now = self.all_project2
+                                print(self.github_now)
 
+                        # reboot
+                        elif self.cur_menu == "reboot":
+                            if self.current_line == 1:
+                                self.cur_menu = "main"
+                            elif self.current_line == 0:
+                                ...
+                            else:
+                                self.cur_menu = "not found"
+                        # github menu
+                        elif self.cur_menu == "github":
+                            if self.current_line == 0:
+                                self.github_sh_bo = True
+                            elif self.current_line == 1:
+                                self.cur_menu = "show github"
+                            elif self.current_line == 2:
+                                self.cur_menu = "main"
+                            else:
+                                self.cur_menu = "not found"
+                    elif key == "Key.esc":
+                        self.cur_menu = "main"
+                        self.github_sh_bo = False
+                    if self.cur_menu == "show github":
+                        print(self.github)
+                        print(" press by buttons in keyboard to ford word\nF1 - end the word\nesc - exit")
+                        if key == "Key.f1":
+                            self.hub_bo = True
+                        elif key == "Key.backspace":
+                            self.hub = self.hub[0:len(self.hub) - 1]
+                        elif key == "Key.esc":
+                            self.cur_menu = "github"
+                        else:
+                            if not key == "Key.enter":
+                                self.hub += key
+                        print(self.hub)
+                        if self.hub_bo:
+                            req = requests.get(f"https://github.com/{self.hub}")
+                            if req.status_code == 200:
+                                if self.hub in self.creator_github_url:
+                                    print("This creator is already on the list")
+                                    self.cur_menu = "github"
+                                else:
+                                    print("OK, I add your coder in catalog")
+                                    self.github.append(self.hub)
+                                    self.cur_menu = "github"
+                            else:
+                                print("This maker is not found")
+
+                    #Creator mod
 
                     if self.cur_menu == "main":
                         if self.creator_mod:
@@ -129,8 +220,10 @@ class Main():
                             styled_text = pyfiglet.figlet_format('Python3', font='doom')
                             print(styled_text)
                     self.current_array()
-                    if self.cur_menu == "creator mod":
 
+                    #def for grafics
+
+                    if self.cur_menu == "creator mod":
                         self.end_array = self.current_menu[self.cur_menu]
                     else:
                         if not self.cur_menu == "not found":
@@ -141,9 +234,17 @@ class Main():
                                 print(f"version new: {self.new_version}")
                                 self.array_1 = self.current_menu[self.cur_menu]
                                 self.adder()
+                            elif self.cur_menu == "reboot":
+                                self.current_manager = "reboot"
+                                self.current_array()
+                                self.array_1 = self.current_menu[self.cur_menu]
+                                self.adder()
                         else:
+
                             self.end_array = self.current_menu[self.cur_menu]
                     print(self.current_line)
+                    if self.github_sh_bo:
+                        self.check_all_github()
                     for i in self.end_array:
                         print(i)
                     time.sleep(0.3)
@@ -185,11 +286,73 @@ class Main():
                     break
             if disk_bool:
                 break
-        # shutil.move(filename, f"{current_directory}/test")
-        with zipfile.ZipFile(f"{current_directory}/test/system-master.zip") as f:
+        shutil.move(filename, f"{current_directory}")
+        with zipfile.ZipFile(f"{current_directory}/system-master.zip") as f:
             f.extractall()
+        os.remove("system-master.zip")
 
+    def github_show(self):
+        array = []
+        self.all_project1 = []
+        for i in self.all_project:
+            i += " " * (len(pyVariable.max_str(self.all_project)) - len(i))
+            self.all_project1.append(f"   {i}")
+        self.t1= f">>{' ' * (len(i) + 3)}"
+        num_1 = 0
+        self.array_2 = []
+        for i in self.all_project1:
+            num_1 += 1
+        for i in range(num_1):
+            if i == self.current_line:
+                self.array_2.append(self.t1)
+            else:
+                self.array_2.append(" " * len(self.t1))
+        self.array_1 = self.all_project1
+        for i in self.array_1:
+            array.append(" ")
+        self.current_menu["show"] = array
+        self.adder()
+        self.cur_menu = "show"
 
+    def check_all_github(self):
+        array = []
+        self.all_project2 = []
+        print(self.github)
+        if not "exit" in self.github:
+            self.github.insert(0, "exit")
+        for i in self.github:
+            i += " " * (len(pyVariable.max_str(self.github)) - len(i))
+            self.all_project2.append(f"   {i}")
+        self.t1 = f">>{' ' * (len(i) + 3)}"
+        num_1 = 0
+        self.array_2 = []
+        for i in self.all_project2:
+            num_1 += 1
+        for i in range(num_1):
+            if i == self.current_line:
+                self.array_2.append(self.t1)
+            else:
+                self.array_2.append(" " * len(self.t1))
+        self.array_1 = self.all_project2
+        for i in self.array_1:
+            array.append(" ")
+
+        self.current_menu["show creators"] = array
+        self.adder()
+        self.cur_menu = "show creators"
+
+    def check_all_project(self):
+        req = requests.get(f"https://github.com/{self.github_now}")
+        soup = BeautifulSoup(req.content, 'html.parser')
+        self.all_project = []
+        for ii in soup.find_all("span", {"class": "repo"}):
+            for i in ii:
+                self.all_project.append(str(i.replace("\n" + " " * 16, "")).replace("\n" + " " * 14, ""))
+        if self.github_now == "sad-man123":
+            creator = "creator"
+        else:
+            creator = self.github_now
+        self.all_project.insert(0, "exit")
 
     def adder(self):
         self.end_array = []
