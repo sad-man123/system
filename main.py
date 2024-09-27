@@ -1,5 +1,5 @@
 import array
-import os, json, pyVariable, zipfile
+import os, pyVariable, zipfile
 
 new_lib = True
 while True:
@@ -8,7 +8,7 @@ while True:
         from selenium import webdriver
         from selenium.webdriver.common.by import By
         from bs4 import BeautifulSoup
-        import pyfiglet, time, requests, shutil
+        import pyfiglet, time, requests, shutil, wget, json
 
         break
     except Exception as ex:
@@ -50,7 +50,11 @@ class Main():
                                         "     add github   ",
                                         "        exit      "],
                              "show": [""],
-                             "show github": [""]}
+                             "show github": [""],
+                             "github menu": [""],
+                             "github project": ["      install     ",
+                                                "       check      ",
+                                                "       exit       "]}
         self.menu_manager = {"main menu": "<<              >>",
                              "not found": "",
                              "reboot": ">>                "}
@@ -66,10 +70,13 @@ class Main():
         self.password_input = ""
         self.hub = ""
         self.hub_bo = ""
+        self.git_bo = False
+        self.github_project = ""
         self.current_creator_menu = "main menu"
         self.github = self.data_json["github list"]
         self.creator_github_url = "sad-man123"
         self.end_array = []
+        self.description_project = ""
         print("Press q, for the start")
         self.check_all_project()
         with Events() as events:
@@ -148,20 +155,41 @@ class Main():
                         # github project
                         elif self.cur_menu == "show":
                             if self.current_line == 0:
-                                self.github_sh_bo = False
                                 self.cur_menu = "github"
+                                self.git_bo = False
+                                self.github_sh_bo = True
+                            else:
+                                self.github_sh_bo = False
+                                self.git_bo = False
+                                self.github_project = self.all_project1[self.current_line]
+                                self.cur_menu = "github project"
+                        elif self.cur_menu == "github menu":
+                            ...
                         # github creators
                         elif self.cur_menu == "github creators":
                             if self.current_line == 0:
                                 self.github_sh_bo = False
                                 self.cur_menu = "github"
+                        # Github project
+                        elif self.cur_menu == "github project":
+                            if self.current_line == 0:
+                                self.install_github()
+                            elif self.current_line == 1:
+                                self.check_readme()
+                                print(self.description_project)
+                            elif self.current_line == 2:
+                                self.cur_menu = "show"
+                                self.git_bo = True
+                        # Show creators
                         elif self.cur_menu == "show creators":
                             if self.current_line == 0:
                                 self.cur_menu = "github"
                                 self.github_sh_bo = False
                             else:
-                                self.github_now = self.all_project2
-                                print(self.github_now)
+                                self.github_now = self.all_project2[self.current_line]
+                                self.git_bo = True
+                                self.github_sh_bo = False
+
 
                         # reboot
                         elif self.cur_menu == "reboot":
@@ -184,6 +212,7 @@ class Main():
                     elif key == "Key.esc":
                         self.cur_menu = "main"
                         self.github_sh_bo = False
+                        self.git_bo = False
                     if self.cur_menu == "show github":
                         print(self.github)
                         print(" press by buttons in keyboard to ford word\nF1 - end the word\nesc - exit")
@@ -245,9 +274,19 @@ class Main():
                     print(self.current_line)
                     if self.github_sh_bo:
                         self.check_all_github()
+                    if self.git_bo:
+                        self.github_show()
                     for i in self.end_array:
                         print(i)
                     time.sleep(0.3)
+
+    def check_readme(self):
+        req = requests.get(f"https://github.com/{self.github_now.replace('   ', '')}/{self.github_project.replace('   ', '').replace('  ', '')}")
+        soup = BeautifulSoup(req.content, 'html.parser')
+        text = soup.find_all("p", attrs={"dir": "auto"})
+        for i in text:
+            for ii in i:
+                self.description_project = ii
 
     def current_array(self):
         self.array_2 = []
@@ -259,6 +298,21 @@ class Main():
                 self.array_2.append(self.menu_manager[self.current_manager])
             else:
                 self.array_2.append(" " * len(self.menu_manager[self.current_manager]))
+
+    def install_github(self):
+        response = requests.get(f"https://github.com/{self.github_now.replace('   ', '')}/{self.github_project.replace('   ', '').replace('  ', '')}/archive/refs/heads/master.zip")
+        file_Path = f'{self.github_project}.zip'
+
+        if response.status_code == 200:
+            with open(file_Path, 'wb') as file:
+                file.write(response.content)
+            print('File downloaded successfully')
+        else:
+            print('Failed to download file')
+        with zipfile.ZipFile(file_Path) as f:
+            f.extractall()
+        print('File extract successfully')
+        os.remove(file_Path)
 
     def installer_updates(self):
         current_file = os.path.realpath(__file__)
