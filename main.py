@@ -4,8 +4,6 @@ new_lib = True
 while True:
     try:
         from pynput.keyboard import Events
-        from selenium import webdriver
-        from selenium.webdriver.common.by import By
         from bs4 import BeautifulSoup
         import pyfiglet, time, requests, shutil, wget, json
 
@@ -330,10 +328,8 @@ class Main():
         current_directory = os.path.dirname(current_file)
         print("Wait a few seconds")
         print("Don't skip the browser")
-        driver = webdriver.Chrome()
-        driver.get("https://github.com/sad-man123/system/archive/refs/heads/master.zip")
+        wget.download("https://github.com/sad-man123/system/archive/refs/heads/master.zip")
         time.sleep(2.5)
-        driver.close()
         print("Archive is downlands")
         disk_array = ["C", "D", "E", "F"]
         disk_bool = False

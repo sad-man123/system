@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="bd530e0e-2bae-44f8-a606-aba27077a30a" name="Changes" comment="complete android version">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/my promming system.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data.json" beforeDir="false" afterPath="$PROJECT_DIR$/data.json" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="2m1EIxFcZNh98XJSHTd2uLZdJMP" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/User/Desktop/my promming system&quot;
+  }
+}</component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="bd530e0e-2bae-44f8-a606-aba27077a30a" name="Changes" comment="" />
+      <created>1726235605437</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1726235605437</updated>
+    </task>
+    <task id="LOCAL-00001" summary="first version">
+      <option name="closed" value="true" />
+      <created>1726237574978</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1726237574978</updated>
+    </task>
+    <task id="LOCAL-00002" summary="library manager is completed">
+      <option name="closed" value="true" />
+      <created>1726309120724</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1726309120724</updated>
+    </task>
+    <task id="LOCAL-00003" summary="complete part main menu end exit">
+      <option name="closed" value="true" />
+      <created>1726335383931</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1726335383931</updated>
+    </task>
+    <task id="LOCAL-00004" summary="complete creator mod and part title menu">
+      <option name="closed" value="true" />
+      <created>1726343610603</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1726343610603</updated>
+    </task>
+    <task id="LOCAL-00005" summary="complete update menu and start make auto updater">
+      <option name="closed" value="true" />
+      <created>1726488594883</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1726488594883</updated>
+    </task>
+    <task id="LOCAL-00006" summary="complete half updater">
+      <option name="closed" value="true" />
+      <created>1726582929667</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1726582929667</updated>
+    </task>
+    <task id="LOCAL-00007" summary="complete full first version and updater">
+      <option name="closed" value="true" />
+      <created>1726643787199</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1726643787199</updated>
+    </task>
+    <task id="LOCAL-00008" summary="complete add and check creators">
+      <option name="closed" value="true" />
+      <created>1726747855010</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1726747855010</updated>
+    </task>
+    <task id="LOCAL-00009" summary="complete all github">
+      <option name="closed" value="true" />
+      <created>1727466680238</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1727466680238</updated>
+    </task>
+    <task id="LOCAL-00010" summary="complete android version">
+      <option name="closed" value="true" />
+      <created>1727628284113</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1727628284113</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="first version" />
+    <MESSAGE value="library manager is completed" />
+    <MESSAGE value="complete part main menu end exit" />
+    <MESSAGE value="complete creator mod and part title menu" />
+    <MESSAGE value="complete update menu and start make auto updater" />
+    <MESSAGE value="complete half updater" />
+    <MESSAGE value="complete full first version and updater" />
+    <MESSAGE value="complete add and check creators" />
+    <MESSAGE value="complete all github" />
+    <MESSAGE value="complete android version" />
+    <option name="LAST_COMMIT_MESSAGE" value="complete android version" />
+  </component>
+</project>
