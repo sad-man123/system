@@ -1,4 +1,3 @@
-import array
 import os, pyVariable, zipfile
 
 new_lib = True
@@ -54,7 +53,9 @@ class Main():
                              "github menu": [""],
                              "github project": ["      install     ",
                                                 "       check      ",
-                                                "       exit       "]}
+                                                "       exit       "],
+                             "direction": ["       exit       ",
+                                           "       local      "]}
         self.menu_manager = {"main menu": "<<              >>",
                              "not found": "",
                              "reboot": ">>                "}
@@ -70,6 +71,7 @@ class Main():
         self.password_input = ""
         self.hub = ""
         self.hub_bo = ""
+        self.local_dirs_names = ""
         self.git_bo = False
         self.github_project = ""
         self.current_creator_menu = "main menu"
@@ -132,6 +134,7 @@ class Main():
                             elif self.current_line == 2:
                                 self.cur_menu = "creator mod"
                             elif self.current_line == 5:
+
                                 self.current_line = 0
                                 self.cur_menu = "version control"
                                 sait = requests.get(f"https://github.com/sad-man123/system")
@@ -143,6 +146,8 @@ class Main():
                             elif self.current_line == 1:
                                 self.current_line = 0
                                 self.cur_menu = "github"
+                            elif self.current_line == 3:
+                                self.cur_menu = "direction"
                             else:
                                 self.cur_menu = "not found"
                         # versions
@@ -152,6 +157,13 @@ class Main():
                             elif self.current_line == 0:
                                 self.installer_updates()
                                 self.cur_menu = "reboot"
+                        # direction menu
+                        elif self.cur_menu == "direction":
+                            if self.current_line == 0:
+                                self.cur_menu = "main"
+                            elif self.current_line == 1:
+                                self.local_names()
+                                print(self.local_dirs_names)
                         # github project
                         elif self.cur_menu == "show":
                             if self.current_line == 0:
@@ -214,7 +226,6 @@ class Main():
                         self.github_sh_bo = False
                         self.git_bo = False
                     if self.cur_menu == "show github":
-                        print(self.github)
                         print(" press by buttons in keyboard to ford word\nF1 - end the word\nesc - exit")
                         if key == "Key.f1":
                             self.hub_bo = True
@@ -229,7 +240,7 @@ class Main():
                         if self.hub_bo:
                             req = requests.get(f"https://github.com/{self.hub}")
                             if req.status_code == 200:
-                                if self.hub in self.creator_github_url:
+                                if self.hub in self.github:
                                     print("This creator is already on the list")
                                     self.cur_menu = "github"
                                 else:
@@ -301,7 +312,7 @@ class Main():
 
     def install_github(self):
         response = requests.get(f"https://github.com/{self.github_now.replace('   ', '')}/{self.github_project.replace('   ', '').replace('  ', '')}/archive/refs/heads/master.zip")
-        file_Path = f'{self.github_project}.zip'
+        file_Path = f'local/{self.github_project}.zip'
 
         if response.status_code == 200:
             with open(file_Path, 'wb') as file:
@@ -345,6 +356,11 @@ class Main():
             f.extractall()
         os.remove("system-master.zip")
 
+    def local_names(self):
+        current_file = os.path.realpath(__file__)
+        current_directory = os.path.dirname(current_file)
+        self.local_dirs_names = os.listdir(f"{current_directory}/local")
+
     def github_show(self):
         array = []
         self.all_project1 = []
@@ -371,7 +387,6 @@ class Main():
     def check_all_github(self):
         array = []
         self.all_project2 = []
-        print(self.github)
         if not "exit" in self.github:
             self.github.insert(0, "exit")
         for i in self.github:
