@@ -96,7 +96,7 @@ class Main():
                         key = "Key.enter"
                     elif len(key) > 1:
                         key = f"Key.{key}"
-                    os.system("cls")
+                    os.system("clear")
                     if key == "s":
                         self.current_line += 1
                     elif key == "w":
@@ -129,7 +129,7 @@ class Main():
                         #Main menu
                         if self.cur_menu == "main":
                             if self.current_line == 4:
-                                os.system("cls")
+                                os.system("clear")
                                 json.dump(self.data_json, open("data.json", "w"))
                                 break
                             elif self.current_line == 2:
