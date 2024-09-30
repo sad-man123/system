@@ -340,7 +340,7 @@ class Main():
             start = f"{i}:/Downloads"
             for dirpath, dirnames, filenames in os.walk(start):
                 for filename in filenames:
-                    if filename == "system-master.zip":
+                    if filename == "system-android.zip":
                         filename = os.path.join(dirpath, filename)
                         print(filename)
                         print(dirpath)
@@ -351,9 +351,9 @@ class Main():
             if disk_bool:
                 break
         shutil.move(filename, f"{current_directory}")
-        with zipfile.ZipFile(f"{current_directory}/system-master.zip") as f:
+        with zipfile.ZipFile(f"{current_directory}/system-android.zip") as f:
             f.extractall()
-        os.remove("system-master.zip")
+        os.remove("system-android.zip")
 
 
     def local_names(self):
