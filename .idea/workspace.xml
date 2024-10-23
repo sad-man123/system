@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bd530e0e-2bae-44f8-a606-aba27077a30a" name="Changes" comment="complete android version">
+    <list default="true" id="bd530e0e-2bae-44f8-a606-aba27077a30a" name="Changes" comment="complete full android version 1">
       <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
@@ -13,7 +13,61 @@
       <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/my promming system.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android system/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android system/data.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android system/lib.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android system/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android system/pyVariable.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android system/start.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/data.json" beforeDir="false" afterPath="$PROJECT_DIR$/data.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pynput/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pynput/_info.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pynput/_util/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pynput/_util/darwin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pynput/_util/darwin_vks.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pynput/_util/uinput.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pynput/_util/win32.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pynput/_util/win32_vks.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pynput/_util/xorg.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pynput/_util/xorg_keysyms.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pynput/keyboard/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pynput/keyboard/_base.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pynput/keyboard/_darwin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pynput/keyboard/_dummy.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pynput/keyboard/_uinput.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pynput/keyboard/_win32.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pynput/keyboard/_xorg.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pynput/mouse/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pynput/mouse/_base.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pynput/mouse/_darwin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pynput/mouse/_dummy.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pynput/mouse/_win32.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pynput/mouse/_xorg.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyput/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyput/_info.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyput/_util/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyput/_util/darwin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyput/_util/darwin_vks.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyput/_util/uinput.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyput/_util/win32.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyput/_util/win32_vks.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyput/_util/xorg.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyput/_util/xorg_keysyms.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyput/keyboard/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyput/keyboard/_base.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyput/keyboard/_darwin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyput/keyboard/_dummy.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyput/keyboard/_uinput.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyput/keyboard/_win32.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyput/keyboard/_xorg.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyput/mouse/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyput/mouse/_base.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyput/mouse/_darwin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyput/mouse/_dummy.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyput/mouse/_win32.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyput/mouse/_xorg.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,8 +89,8 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/User/Desktop/my promming system&quot;
+    &quot;git-widget-placeholder&quot;: &quot;android&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/User/Desktop/android_system&quot;
   }
 }</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -128,7 +182,39 @@
       <option name="project" value="LOCAL" />
       <updated>1727628284113</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="complete android version">
+      <option name="closed" value="true" />
+      <created>1727628757917</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1727628757917</updated>
+    </task>
+    <task id="LOCAL-00012" summary="complete full android version">
+      <option name="closed" value="true" />
+      <created>1727725591575</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1727725591575</updated>
+    </task>
+    <task id="LOCAL-00013" summary="complete full android version">
+      <option name="closed" value="true" />
+      <created>1727726682487</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1727726682487</updated>
+    </task>
+    <task id="LOCAL-00014" summary="complete full android version 1">
+      <option name="closed" value="true" />
+      <created>1727726743301</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1727726743301</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -136,7 +222,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="android" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -153,6 +251,8 @@
     <MESSAGE value="complete add and check creators" />
     <MESSAGE value="complete all github" />
     <MESSAGE value="complete android version" />
-    <option name="LAST_COMMIT_MESSAGE" value="complete android version" />
+    <MESSAGE value="complete full android version" />
+    <MESSAGE value="complete full android version 1" />
+    <option name="LAST_COMMIT_MESSAGE" value="complete full android version 1" />
   </component>
 </project>

@@ -1,12 +1,14 @@
-import os, pyVariable, zipfile
+import os, pyVariable, zipfile, re
 
 new_lib = True
+t = input("Press w for internet start: ")
 while True:
     try:
-        from pynput.keyboard import Events
-        from bs4 import BeautifulSoup
-        import pyfiglet, time, requests, shutil, wget, json
-
+        import pyfiglet, time,  shutil,  json
+        if t == "w":
+            from bs4 import BeautifulSoup
+            from pynput import keyboard
+            import requests, wget
         break
     except Exception as ex:
         if new_lib:
@@ -34,7 +36,8 @@ class Main():
                                       "    creator       ",
                                       "    directory     ",
                                       "    exit          ",
-                                      "    check update  "],
+                                      "    check update  ",
+                                      "    instruction   "],
                              "creator mod": ["for exit click Y in keyboard"],
                              "not found": ["This part isn't make",
                                            "Coming soon",
@@ -53,7 +56,12 @@ class Main():
                                                 "       check      ",
                                                 "       exit       "],
                              "direction": ["       exit       ",
-                                           "       local      "]}
+                                           "       local      "],
+                             "codes": [],
+                             "dirs": [],
+                             "code": ["       exit       ",
+                                      "       start      ",
+                                      "     check RM     "]}
         self.menu_manager = {"main menu": "<<              >>",
                              "not found": "",
                              "reboot": ">>                "}
@@ -64,10 +72,14 @@ class Main():
         self.data_json = json.load(open("data.json"))
         self.creator_mod = eval(self.data_json["creator mod"])
         self.now_version = self.data_json["version"]
+        self.dirs = self.data_json["dirs"]
+        self.dir_now = ""
         self.update_bool = False
         self.github_now = "sad-man123"
         self.password_input = ""
         self.hub = ""
+        self.cur_dir = "local"
+        self.code_now = ""
         self.hub_bo = ""
         self.local_dirs_names = ""
         self.git_bo = False
@@ -78,9 +90,9 @@ class Main():
         self.end_array = []
         self.description_project = ""
         print("Press q, for the start")
-        self.check_all_project()
-        with Events() as events:
-            for event in events:
+
+        with keyboard.Events() as events:
+            for eventt in events:
                 self.creator = {"main menu": ["",
                                               "",
                                               f"   {'  ' * self.current_line}@@   |   @@",
@@ -91,9 +103,10 @@ class Main():
                                               f"   {'  ' * self.current_line}@@       @@",
                                               f"   {'  ' * self.current_line}@@       @@",
                                               ""]}
-                if "Release" in str(event):
+                if "Release" in str(eventt):
+                    key = str(eventt.key).replace("'", "")
+                    print(key)
                     os.system("cls")
-                    key = str(event.key).replace("'", "")
                     if key == "s":
                         self.current_line += 1
                     elif key == "w":
@@ -121,7 +134,6 @@ class Main():
 
 
                     #Buttons def
-
                     if key == "Key.enter":
                         #Main menu
                         if self.cur_menu == "main":
@@ -129,9 +141,11 @@ class Main():
                                 os.system("cls")
                                 json.dump(self.data_json, open("data.json", "w"))
                                 break
+                            elif self.current_line == 0:
+                                self.check_dirs()
                             elif self.current_line == 2:
                                 self.cur_menu = "creator mod"
-                            elif self.current_line == 5:
+                            elif self.current_line == -1:
 
                                 self.current_line = 0
                                 self.cur_menu = "version control"
@@ -141,6 +155,8 @@ class Main():
                                 for i in text:
                                     self.new_version = i
                                 self.update_bool = True
+                            elif self.current_line == 6:
+                                self.check_instruction()
                             elif self.current_line == 1:
                                 self.current_line = 0
                                 self.cur_menu = "github"
@@ -154,7 +170,8 @@ class Main():
                                 self.cur_menu = "main"
                             elif self.current_line == 0:
                                 self.installer_updates()
-                                self.cur_menu = "reboot"
+                            else:
+                                self.cur_menu = "not found"
                         # direction menu
                         elif self.cur_menu == "direction":
                             if self.current_line == 0:
@@ -172,6 +189,7 @@ class Main():
                                 self.github_sh_bo = False
                                 self.git_bo = False
                                 self.github_project = self.all_project1[self.current_line]
+
                                 self.cur_menu = "github project"
                         elif self.cur_menu == "github menu":
                             ...
@@ -196,11 +214,19 @@ class Main():
                                 self.cur_menu = "github"
                                 self.github_sh_bo = False
                             else:
-                                self.github_now = self.all_project2[self.current_line]
+                                self.check_all_project()
+                                self.github_now = re.sub(" ", "", self.all_project2[self.current_line])
                                 self.git_bo = True
                                 self.github_sh_bo = False
-
-
+                        # directoris menu
+                        elif self.cur_menu == "dirs":
+                            if self.current_line == 0:
+                                self.cur_menu = "main"
+                            else:
+                                self.cur_menu = "codes"
+                                print(self.current_menu[self.cur_menu])
+                                self.dir_now = re.sub(" ", "", self.dirs[self.current_line])
+                                self.check_codes()
                         # reboot
                         elif self.cur_menu == "reboot":
                             if self.current_line == 1:
@@ -209,6 +235,25 @@ class Main():
                                 ...
                             else:
                                 self.cur_menu = "not found"
+                        # codes menu
+                        elif self.cur_menu == "codes":
+                            if self.current_line == 0:
+                                self.cur_menu = "dirs"
+                            else:
+                                self.code_now = re.sub(" ", "", self.current_menu[self.cur_menu][self.current_line])
+                                self.cur_menu = "code"
+                        # code
+                        elif self.cur_menu == "code":
+                            if self.current_line == 1:
+                                try:
+                                    os.system(f"python local/{self.code_now}/main.py")
+                                except:
+                                    print("error")
+
+                            elif self.cur_menu == 2:
+                                self.check_readme()
+                            elif self.current_line == 0:
+                                self.cur_menu = "codes"
                         # github menu
                         elif self.cur_menu == "github":
                             if self.current_line == 0:
@@ -290,12 +335,31 @@ class Main():
                     time.sleep(0.3)
 
     def check_readme(self):
-        req = requests.get(f"https://github.com/{self.github_now.replace('   ', '')}/{self.github_project.replace('   ', '').replace('  ', '')}")
+        req = requests.get(f"https://github.com/{re.sub(' ', '', self.github_now)}/{re.sub(' ', '', self.github_project)}")
         soup = BeautifulSoup(req.content, 'html.parser')
         text = soup.find_all("p", attrs={"dir": "auto"})
         for i in text:
             for ii in i:
                 self.description_project = ii
+
+    def check_dirs(self):
+        array = []
+        for i in self.dirs:
+            i = f"   {i}"
+            array.append(i + " " * (len(pyVariable.max_str(self.dirs)) + 3 - len(i)))
+        self.current_menu["dirs"] = array
+        self.cur_menu = "dirs"
+
+    def check_codes(self):
+        codes = os.listdir(self.dir_now)
+        array = []
+        for i in codes:
+            i = f"   {i}"
+            array.append(i + " " * (len(pyVariable.max_str(codes)) + 3 - len(i)))
+        array.insert(0, "   exit" + " " * (len(pyVariable.max_str(codes)) + 3 - len(i)))
+        self.current_menu["codes"] = array
+        self.cur_menu = "codes"
+
 
     def current_array(self):
         self.array_2 = []
@@ -309,35 +373,38 @@ class Main():
                 self.array_2.append(" " * len(self.menu_manager[self.current_manager]))
 
     def install_github(self):
-        response = requests.get(f"https://github.com/{self.github_now.replace('   ', '')}/{self.github_project.replace('   ', '').replace('  ', '')}/archive/refs/heads/master.zip")
-        file_Path = f'local/{self.github_project}.zip'
+        response = requests.get(f'https://github.com/{re.sub(" ", "", self.github_now)}/{re.sub(" ", "", self.github_project)}/archive/refs/heads/master.zip')
+        file_Path = f'local/{re.sub(" ", "", self.github_project)}.zip'
+        print(f'https://github.com/{re.sub(" ", "", self.github_now)}/{re.sub(" ", "", self.github_project)}/archive/refs/heads/master.zip')
 
         if response.status_code == 200:
-            with open(file_Path, 'wb') as file:
-                file.write(response.content)
-            print('File downloaded successfully')
+            try:
+                with open(file_Path, 'wb') as file:
+                    file.write(response.content)
+                print('File downloaded successfully')
+                with zipfile.ZipFile(file_Path) as f:
+                    f.extractall(path="local")
+                print('File extract successfully')
+                os.remove(file_Path)
+            except:
+                print("this project is not available")
         else:
             print('Failed to download file')
-        with zipfile.ZipFile(file_Path) as f:
-            f.extractall()
-        print('File extract successfully')
-        os.remove(file_Path)
 
     def installer_updates(self):
         current_file = os.path.realpath(__file__)
         current_directory = os.path.dirname(current_file)
         print("Wait a few seconds")
-        print("Don't skip the browser")
         wget.download("https://github.com/sad-man123/system/archive/refs/heads/master.zip")
         time.sleep(2.5)
         print("Archive is downlands")
         disk_array = ["C", "D", "E", "F"]
         disk_bool = False
         for i in disk_array:
-            start = f"{i}:/Downloads"
+            start = f"/"
             for dirpath, dirnames, filenames in os.walk(start):
                 for filename in filenames:
-                    if filename == "system-master.zip":
+                    if filename == "system-android.zip":
                         filename = os.path.join(dirpath, filename)
                         print(filename)
                         print(dirpath)
@@ -348,9 +415,10 @@ class Main():
             if disk_bool:
                 break
         shutil.move(filename, f"{current_directory}")
-        with zipfile.ZipFile(f"{current_directory}/system-master.zip") as f:
+        with zipfile.ZipFile(f"{current_directory}/system-android.zip") as f:
             f.extractall()
-        os.remove("system-master.zip")
+        os.remove("system-android.zip")
+
 
     def local_names(self):
         current_file = os.path.realpath(__file__)
@@ -406,13 +474,24 @@ class Main():
         self.adder()
         self.cur_menu = "show creators"
 
+    def read_RM(self):
+        if os.path.exists(f"{self.cur_dir}/{self.code_now}/ReadMe.txt"):
+            with open(f"{self.cur_dir}/{self.code_now}/ReadMe.txt") as f:
+                print(f.read())
+        else:
+            print("This file does not exist")
+
+    def check_instruction(self):
+        with open("instruction.txt", encoding="utf-8") as f:
+            print(f.read())
+
     def check_all_project(self):
-        req = requests.get(f"https://github.com/{self.github_now}")
+        req = requests.get(f"https://github.com/{self.github_now}?tab=repositories")
         soup = BeautifulSoup(req.content, 'html.parser')
         self.all_project = []
-        for ii in soup.find_all("span", {"class": "repo"}):
+        for ii in soup.find_all("a", {"itemprop": "name codeRepository"}):
             for i in ii:
-                self.all_project.append(str(i.replace("\n" + " " * 16, "")).replace("\n" + " " * 14, ""))
+                self.all_project.append(re.sub("\n", "", re.sub(" ", "", i)))
         if self.github_now == "sad-man123":
             creator = "creator"
         else:
@@ -438,4 +517,13 @@ class Main():
             num_2 = 0
 
 
-Main()
+while True:
+    # try:
+        Main()
+        break
+    # except Exception as ex:
+    #     ex = str(ex)
+    #     if "no module name" in ex:
+    #         print("Check you internet connection or install python library")
+    #     else:
+    #         print(f"error: {ex}")
